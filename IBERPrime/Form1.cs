@@ -26,5 +26,10 @@ namespace IBERPrime
         {
             throw new NotImplementedException();
         }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            ProcessAllLines(this.richTextBox2);
+        }
     }
 }
