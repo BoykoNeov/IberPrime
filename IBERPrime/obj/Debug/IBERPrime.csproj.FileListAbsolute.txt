@@ -1,0 +1,9 @@
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\bin\Debug\IBERPrime.exe.config
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\bin\Debug\IBERPrime.exe
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\bin\Debug\IBERPrime.pdb
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.csprojAssemblyReference.cache
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.Properties.Resources.resources
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.csproj.GenerateResource.cache
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.exe
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.pdb
+C:\Users\lavrentii\Documents\GitHub\IberPrime\IBERPrime\obj\Debug\IBERPrime.Form1.resources
