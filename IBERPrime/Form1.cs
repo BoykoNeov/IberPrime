@@ -17,9 +17,14 @@ namespace IBERPrime
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+                ProcessAllLines(this.richTextBox1);
+        }
 
+        private void ProcessAllLines(RichTextBox richTextBox)
+        {
+            throw new NotImplementedException();
         }
     }
 }
