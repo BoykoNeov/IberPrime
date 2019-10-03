@@ -61,25 +61,35 @@ namespace IBERPrime
             }
         }
 
-
         /// <summary>
         /// Reverse complement, box 1 (Sequence 1)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
+            ToggleClickedButtonColor(sender as Button);
             ReverseComplement(richTextBox1);
         }
 
         /// <summary>
         /// Reverse complement for box 2 (sequence 2)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
+            ToggleClickedButtonColor(sender as Button);
             ReverseComplement(richTextBox2);
+        }
+
+        /// Make the button appears "pushed" by making its text red. This could be a problem in a system, where the defualt color is black, but I have never seen such an example in practive
+        private void ToggleClickedButtonColor(Button clickedButton)
+        {
+            if (clickedButton.ForeColor == DefaultForeColor)
+            {
+                clickedButton.ForeColor = Color.Red;
+            }
+            else
+            {
+                clickedButton.ForeColor = Control.DefaultForeColor;
+            }
         }
 
         private void ReverseComplement(RichTextBox richTextBox)
