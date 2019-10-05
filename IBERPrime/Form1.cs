@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Text;
-
-namespace IBERPrime
+﻿namespace IBERPrime
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -20,28 +19,55 @@ namespace IBERPrime
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            ProcessAllLines(this.richTextBox1);
+            if (autoconformcheckBox1.Checked)
+            {
+                ProcessSeqenceInput(this.richTextBox1);
+            }
+        }
+
+        private void conformBox1Button_Click(object sender, EventArgs e)
+        {
+            ProcessSeqenceInput(this.richTextBox1);
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
-            ProcessAllLines(this.richTextBox2);
+            if (autoconformcheckBox2.Checked)
+            {
+                ProcessSeqenceInput(this.richTextBox2);
+            }
+        }
+
+        private void conformBox2Button_Click(object sender, EventArgs e)
+        {
+            ProcessSeqenceInput(this.richTextBox2);
         }
 
         /// <summary>
         /// Checks input for validity - currently valid letters are A T G C, all others are change to 'N'
         /// </summary>
         /// <param name="richTextBox"></param>
-        private void ProcessAllLines(RichTextBox richTextBox)
+        private void ProcessSeqenceInput(RichTextBox richTextBox)
         {
             bool nonStandardLettersFound = false;
             StringBuilder sb = new StringBuilder();
 
-            foreach (char ch in richTextBox.Text.ToUpper())
+            List<string> lines = richTextBox.Text.Split(new[] { "\r\n", "\r", "\n", Environment.NewLine },                                                    StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            //Remove the first line from FASTA
+            lines.RemoveAll(x => x.Contains(">"));
+            string combindedString = string.Join("", lines.ToArray());
+
+
+            foreach (char ch in combindedString.ToUpper())
             {
                 if (ch == 'A' || ch == 'C' || ch == 'G' || ch == 'T')
                 {
                     sb.Append(ch);
+                }
+                else if (char.IsWhiteSpace(ch))
+                {
+                    continue;
                 }
                 else
                 {
@@ -57,7 +83,11 @@ namespace IBERPrime
 
             if (nonStandardLettersFound)
             {
-                OutputMessages.Text = "Non standard characters found. Non standard characters are substituted to 'N'.";
+                OutputMessages.Text = "Non standard characters found. Non standard characters are substituted with 'N'.";
+            }
+            else
+            {
+                OutputMessages.Text = "Input conformed";
             }
         }
 
