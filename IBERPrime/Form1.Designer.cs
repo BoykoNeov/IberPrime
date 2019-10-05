@@ -62,7 +62,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(1120, 124);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox1_KeyUp);
             // 
             // richTextBox2
             // 
@@ -72,7 +72,7 @@
             this.richTextBox2.Size = new System.Drawing.Size(1120, 123);
             this.richTextBox2.TabIndex = 2;
             this.richTextBox2.Text = "";
-            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
+            this.richTextBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox2_KeyUp);
             // 
             // richTextBox3
             // 
@@ -136,12 +136,12 @@
             // 
             this.OutputMessages.AutoSize = true;
             this.OutputMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OutputMessages.ForeColor = System.Drawing.Color.OrangeRed;
+            this.OutputMessages.ForeColor = System.Drawing.Color.Orange;
             this.OutputMessages.Location = new System.Drawing.Point(15, 378);
             this.OutputMessages.Name = "OutputMessages";
-            this.OutputMessages.Size = new System.Drawing.Size(17, 16);
+            this.OutputMessages.Size = new System.Drawing.Size(226, 16);
             this.OutputMessages.TabIndex = 9;
-            this.OutputMessages.Text = "...";
+            this.OutputMessages.Text = "Conform inputs before further actions!";
             // 
             // conformBox1Button
             // 
@@ -151,7 +151,7 @@
             this.conformBox1Button.TabIndex = 10;
             this.conformBox1Button.Text = "Conform input";
             this.conformBox1Button.UseVisualStyleBackColor = true;
-            this.conformBox1Button.Click += new System.EventHandler(this.conformBox1Button_Click);
+            this.conformBox1Button.Click += new System.EventHandler(this.ConformBox1Button_Click);
             // 
             // conformBox2Button
             // 
@@ -161,7 +161,7 @@
             this.conformBox2Button.TabIndex = 11;
             this.conformBox2Button.Text = "Conform input";
             this.conformBox2Button.UseVisualStyleBackColor = true;
-            this.conformBox2Button.Click += new System.EventHandler(this.conformBox2Button_Click);
+            this.conformBox2Button.Click += new System.EventHandler(this.ConformBox2Button_Click);
             // 
             // autoconformcheckBox1
             // 
