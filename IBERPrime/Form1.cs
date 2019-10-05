@@ -8,39 +8,92 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Timers;
     using System.Windows.Forms;
 
     public partial class Form1 : Form
     {
+        private System.Timers.Timer housekeepingTimer;
+
         public Form1()
         {
             InitializeComponent();
+            housekeepingTimer = new System.Timers.Timer();
+            housekeepingTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdatingFormValues);
+            housekeepingTimer.Interval = 1000;
+            housekeepingTimer.Enabled = true;
+        }
+
+        public delegate void InvokeDelegate();
+
+        private void InvokeTextLengthChange(object sender, EventArgs e)
+        {
+            Invoke(new InvokeDelegate(ChangeTextLengthValue));
+        }
+
+        public void ChangeTextLengthValue()
+        {
+            if (int.Parse(inputLengthValueBox1.Text) != inputBox1.Text.Length)
+            {
+                inputLengthValueBox1.Text = inputBox1.Text.Length.ToString();
+            }
+
+            if (int.Parse(inputLengthValueBox2.Text) != inputBox2.Text.Length)
+            {
+                inputLengthValueBox2.Text = inputBox2.Text.Length.ToString();
+            }
+
+            if (int.Parse(caretPositionValueBox1.Text) != inputBox1.SelectionStart)
+            {
+                caretPositionValueBox1.Text = inputBox1.SelectionStart.ToString();
+            }
+
+            if (int.Parse(caretPositionValueBox2.Text) != inputBox2.SelectionStart)
+            {
+                caretPositionValueBox2.Text = inputBox2.SelectionStart.ToString();
+            }
+
+            if (int.Parse(selectionLengthValueBox1.Text) != inputBox1.SelectionLength)
+            {
+                selectionLengthValueBox1.Text = inputBox1.SelectionLength.ToString();
+            }
+
+            if (int.Parse(selectionLengthValueBox2.Text) != inputBox2.SelectionLength)
+            {
+                selectionLengthValueBox2.Text = inputBox2.SelectionLength.ToString();
+            }
+        }
+
+        private void UpdatingFormValues(object sender, ElapsedEventArgs e)
+        {
+            InvokeTextLengthChange(sender, e);
+
         }
 
         private void RichTextBox1_KeyUp(object sender, KeyEventArgs e)
         {
             if (autoconformcheckBox1.Checked)
             {
-                ProcessSeqenceInput(this.richTextBox1);
+                ProcessSeqenceInput(this.inputBox1);
             }
         }
 
-        private void richTextBox2_KeyUp(object sender, KeyEventArgs e)
+        private void RichTextBox2_KeyUp(object sender, KeyEventArgs e)
         {
             if (autoconformcheckBox2.Checked)
             {
-                ProcessSeqenceInput(this.richTextBox2);
+                ProcessSeqenceInput(this.inputBox2);
             }
         }
 
         private void ConformBox1Button_Click(object sender, EventArgs e)
         {
-            ProcessSeqenceInput(this.richTextBox1);
+            ProcessSeqenceInput(this.inputBox1);
         }
 
         private void ConformBox2Button_Click(object sender, EventArgs e)
         {
-            ProcessSeqenceInput(this.richTextBox2);
+            ProcessSeqenceInput(this.inputBox2);
         }
 
         /// <summary>
@@ -53,7 +106,7 @@
             bool nonStandardLettersFound = false;
             StringBuilder sb = new StringBuilder();
 
-            List<string> lines = textBoxtoProcess.Text.Split(new[] { "\r\n", "\r", "\n", Environment.NewLine },                                                    StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> lines = textBoxtoProcess.Text.Split(new[] { "\r\n", "\r", "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             //Remove the first line from FASTA
             lines.RemoveAll(x => x.Contains(">"));
@@ -115,7 +168,7 @@
         private void Button1_Click(object sender, EventArgs e)
         {
             ToggleClickedButtonColor(sender as Button);
-            ReverseComplement(richTextBox1);
+            ReverseComplement(inputBox1);
         }
 
         /// <summary>
@@ -124,7 +177,7 @@
         private void Button2_Click(object sender, EventArgs e)
         {
             ToggleClickedButtonColor(sender as Button);
-            ReverseComplement(richTextBox2);
+            ReverseComplement(inputBox2);
         }
 
         /// Make the button appears "pushed" by making its text red. This could be a problem in a system, where the defualt color is black, but I have never seen such an example in practive
@@ -151,24 +204,28 @@
             {
                 switch (ch)
                 {
+                    case 'a':
                     case 'A':
                         {
                             sb.Append('T');
                             break;
                         }
 
+                    case 't':
                     case 'T':
                         {
                             sb.Append('A');
                             break;
                         }
 
+                    case 'c':
                     case 'C':
                         {
                             sb.Append('G');
                             break;
                         }
 
+                    case 'g':
                     case 'G':
                         {
                             sb.Append('C');
@@ -181,12 +238,23 @@
                             break;
                         }
                 }
-
-                textBoxToReverseComplement.Text = sb.ToString();
-                textBoxToReverseComplement.Enabled = true;
-                this.ActiveControl = textBoxToReverseComplement;
-                textBoxToReverseComplement.Select(textBoxToReverseComplement.Text.Length, 0);
             }
+
+            textBoxToReverseComplement.Enabled = true;
+            this.ActiveControl = textBoxToReverseComplement;
+            textBoxToReverseComplement.Text = sb.ToString();
+            textBoxToReverseComplement.Select(textBoxToReverseComplement.Text.Length, 0);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            housekeepingTimer.Stop();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            housekeepingTimer.Dispose();
+            //housekeepingTimer = null;
         }
     }
 }

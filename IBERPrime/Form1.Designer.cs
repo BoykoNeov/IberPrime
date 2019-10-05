@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.FindPrimers = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.inputBox1 = new System.Windows.Forms.RichTextBox();
+            this.inputBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,41 +42,53 @@
             this.conformBox2Button = new System.Windows.Forms.Button();
             this.autoconformcheckBox1 = new System.Windows.Forms.CheckBox();
             this.autoconformcheckBox2 = new System.Windows.Forms.CheckBox();
+            this.inputLengthBox1label = new System.Windows.Forms.Label();
+            this.inputLengthBox2label = new System.Windows.Forms.Label();
+            this.inputLengthValueBox1 = new System.Windows.Forms.Label();
+            this.inputLengthValueBox2 = new System.Windows.Forms.Label();
+            this.caretPositionBox1Label = new System.Windows.Forms.Label();
+            this.CaretPositionBox2Label = new System.Windows.Forms.Label();
+            this.caretPositionValueBox1 = new System.Windows.Forms.Label();
+            this.caretPositionValueBox2 = new System.Windows.Forms.Label();
+            this.SelectionLengthBox1Label = new System.Windows.Forms.Label();
+            this.selectionLengthBox2Label = new System.Windows.Forms.Label();
+            this.selectionLengthValueBox1 = new System.Windows.Forms.Label();
+            this.selectionLengthValueBox2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // FindPrimers
             // 
-            this.FindPrimers.Location = new System.Drawing.Point(1057, 420);
+            this.FindPrimers.Location = new System.Drawing.Point(1057, 452);
             this.FindPrimers.Name = "FindPrimers";
             this.FindPrimers.Size = new System.Drawing.Size(75, 23);
             this.FindPrimers.TabIndex = 0;
             this.FindPrimers.Text = "FindPrimers";
             this.FindPrimers.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // inputBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 55);
-            this.richTextBox1.MaxLength = 20000;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.richTextBox1.Size = new System.Drawing.Size(1120, 124);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox1_KeyUp);
+            this.inputBox1.Location = new System.Drawing.Point(12, 55);
+            this.inputBox1.MaxLength = 20000;
+            this.inputBox1.Name = "inputBox1";
+            this.inputBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.inputBox1.Size = new System.Drawing.Size(1120, 124);
+            this.inputBox1.TabIndex = 1;
+            this.inputBox1.Text = "";
+            this.inputBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox1_KeyUp);
             // 
-            // richTextBox2
+            // inputBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(12, 238);
-            this.richTextBox2.MaxLength = 20000;
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(1120, 123);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox2_KeyUp);
+            this.inputBox2.Location = new System.Drawing.Point(12, 238);
+            this.inputBox2.MaxLength = 20000;
+            this.inputBox2.Name = "inputBox2";
+            this.inputBox2.Size = new System.Drawing.Size(1120, 123);
+            this.inputBox2.TabIndex = 2;
+            this.inputBox2.Text = "";
+            this.inputBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox2_KeyUp);
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(12, 448);
+            this.richTextBox3.Location = new System.Drawing.Point(12, 480);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(1120, 163);
             this.richTextBox3.TabIndex = 3;
@@ -126,7 +138,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(12, 420);
+            this.label3.Location = new System.Drawing.Point(12, 452);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 16);
             this.label3.TabIndex = 8;
@@ -137,7 +149,7 @@
             this.OutputMessages.AutoSize = true;
             this.OutputMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OutputMessages.ForeColor = System.Drawing.Color.Orange;
-            this.OutputMessages.Location = new System.Drawing.Point(15, 378);
+            this.OutputMessages.Location = new System.Drawing.Point(13, 407);
             this.OutputMessages.Name = "OutputMessages";
             this.OutputMessages.Size = new System.Drawing.Size(226, 16);
             this.OutputMessages.TabIndex = 9;
@@ -183,11 +195,131 @@
             this.autoconformcheckBox2.Text = "auto";
             this.autoconformcheckBox2.UseVisualStyleBackColor = true;
             // 
+            // inputLengthBox1label
+            // 
+            this.inputLengthBox1label.AutoSize = true;
+            this.inputLengthBox1label.Location = new System.Drawing.Point(12, 182);
+            this.inputLengthBox1label.Name = "inputLengthBox1label";
+            this.inputLengthBox1label.Size = new System.Drawing.Size(66, 13);
+            this.inputLengthBox1label.TabIndex = 14;
+            this.inputLengthBox1label.Text = "Input length:";
+            // 
+            // inputLengthBox2label
+            // 
+            this.inputLengthBox2label.AutoSize = true;
+            this.inputLengthBox2label.Location = new System.Drawing.Point(12, 364);
+            this.inputLengthBox2label.Name = "inputLengthBox2label";
+            this.inputLengthBox2label.Size = new System.Drawing.Size(66, 13);
+            this.inputLengthBox2label.TabIndex = 15;
+            this.inputLengthBox2label.Text = "Input length:";
+            // 
+            // inputLengthValueBox1
+            // 
+            this.inputLengthValueBox1.AutoSize = true;
+            this.inputLengthValueBox1.Location = new System.Drawing.Point(76, 182);
+            this.inputLengthValueBox1.Name = "inputLengthValueBox1";
+            this.inputLengthValueBox1.Size = new System.Drawing.Size(13, 13);
+            this.inputLengthValueBox1.TabIndex = 16;
+            this.inputLengthValueBox1.Text = "0";
+            // 
+            // inputLengthValueBox2
+            // 
+            this.inputLengthValueBox2.AutoSize = true;
+            this.inputLengthValueBox2.Location = new System.Drawing.Point(79, 364);
+            this.inputLengthValueBox2.Name = "inputLengthValueBox2";
+            this.inputLengthValueBox2.Size = new System.Drawing.Size(13, 13);
+            this.inputLengthValueBox2.TabIndex = 17;
+            this.inputLengthValueBox2.Text = "0";
+            // 
+            // caretPositionBox1Label
+            // 
+            this.caretPositionBox1Label.AutoSize = true;
+            this.caretPositionBox1Label.Location = new System.Drawing.Point(118, 182);
+            this.caretPositionBox1Label.Name = "caretPositionBox1Label";
+            this.caretPositionBox1Label.Size = new System.Drawing.Size(151, 13);
+            this.caretPositionBox1Label.TabIndex = 18;
+            this.caretPositionBox1Label.Text = "Cursor position/Selection start:";
+            // 
+            // CaretPositionBox2Label
+            // 
+            this.CaretPositionBox2Label.AutoSize = true;
+            this.CaretPositionBox2Label.Location = new System.Drawing.Point(119, 364);
+            this.CaretPositionBox2Label.Name = "CaretPositionBox2Label";
+            this.CaretPositionBox2Label.Size = new System.Drawing.Size(151, 13);
+            this.CaretPositionBox2Label.TabIndex = 19;
+            this.CaretPositionBox2Label.Text = "Cursor position/Selection start:";
+            // 
+            // caretPositionValueBox1
+            // 
+            this.caretPositionValueBox1.AutoSize = true;
+            this.caretPositionValueBox1.Location = new System.Drawing.Point(271, 182);
+            this.caretPositionValueBox1.Name = "caretPositionValueBox1";
+            this.caretPositionValueBox1.Size = new System.Drawing.Size(13, 13);
+            this.caretPositionValueBox1.TabIndex = 20;
+            this.caretPositionValueBox1.Text = "0";
+            // 
+            // caretPositionValueBox2
+            // 
+            this.caretPositionValueBox2.AutoSize = true;
+            this.caretPositionValueBox2.Location = new System.Drawing.Point(271, 364);
+            this.caretPositionValueBox2.Name = "caretPositionValueBox2";
+            this.caretPositionValueBox2.Size = new System.Drawing.Size(13, 13);
+            this.caretPositionValueBox2.TabIndex = 21;
+            this.caretPositionValueBox2.Text = "0";
+            // 
+            // SelectionLengthBox1Label
+            // 
+            this.SelectionLengthBox1Label.AutoSize = true;
+            this.SelectionLengthBox1Label.Location = new System.Drawing.Point(329, 182);
+            this.SelectionLengthBox1Label.Name = "SelectionLengthBox1Label";
+            this.SelectionLengthBox1Label.Size = new System.Drawing.Size(86, 13);
+            this.SelectionLengthBox1Label.TabIndex = 22;
+            this.SelectionLengthBox1Label.Text = "Selection length:";
+            // 
+            // selectionLengthBox2Label
+            // 
+            this.selectionLengthBox2Label.AutoSize = true;
+            this.selectionLengthBox2Label.Location = new System.Drawing.Point(329, 364);
+            this.selectionLengthBox2Label.Name = "selectionLengthBox2Label";
+            this.selectionLengthBox2Label.Size = new System.Drawing.Size(86, 13);
+            this.selectionLengthBox2Label.TabIndex = 23;
+            this.selectionLengthBox2Label.Text = "Selection length:";
+            // 
+            // selectionLengthValueBox1
+            // 
+            this.selectionLengthValueBox1.AutoSize = true;
+            this.selectionLengthValueBox1.Location = new System.Drawing.Point(413, 182);
+            this.selectionLengthValueBox1.Name = "selectionLengthValueBox1";
+            this.selectionLengthValueBox1.Size = new System.Drawing.Size(13, 13);
+            this.selectionLengthValueBox1.TabIndex = 24;
+            this.selectionLengthValueBox1.Text = "0";
+            // 
+            // selectionLengthValueBox2
+            // 
+            this.selectionLengthValueBox2.AutoSize = true;
+            this.selectionLengthValueBox2.Location = new System.Drawing.Point(412, 364);
+            this.selectionLengthValueBox2.Name = "selectionLengthValueBox2";
+            this.selectionLengthValueBox2.Size = new System.Drawing.Size(13, 13);
+            this.selectionLengthValueBox2.TabIndex = 25;
+            this.selectionLengthValueBox2.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 687);
+            this.Controls.Add(this.selectionLengthValueBox2);
+            this.Controls.Add(this.selectionLengthValueBox1);
+            this.Controls.Add(this.selectionLengthBox2Label);
+            this.Controls.Add(this.SelectionLengthBox1Label);
+            this.Controls.Add(this.caretPositionValueBox2);
+            this.Controls.Add(this.caretPositionValueBox1);
+            this.Controls.Add(this.CaretPositionBox2Label);
+            this.Controls.Add(this.caretPositionBox1Label);
+            this.Controls.Add(this.inputLengthValueBox2);
+            this.Controls.Add(this.inputLengthValueBox1);
+            this.Controls.Add(this.inputLengthBox2label);
+            this.Controls.Add(this.inputLengthBox1label);
             this.Controls.Add(this.autoconformcheckBox2);
             this.Controls.Add(this.autoconformcheckBox1);
             this.Controls.Add(this.conformBox2Button);
@@ -199,11 +331,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox3);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.inputBox2);
+            this.Controls.Add(this.inputBox1);
             this.Controls.Add(this.FindPrimers);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,8 +346,8 @@
         #endregion
 
         private System.Windows.Forms.Button FindPrimers;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox inputBox1;
+        private System.Windows.Forms.RichTextBox inputBox2;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -225,5 +359,17 @@
         private System.Windows.Forms.Button conformBox2Button;
         private System.Windows.Forms.CheckBox autoconformcheckBox1;
         private System.Windows.Forms.CheckBox autoconformcheckBox2;
+        private System.Windows.Forms.Label inputLengthBox1label;
+        private System.Windows.Forms.Label inputLengthBox2label;
+        private System.Windows.Forms.Label inputLengthValueBox1;
+        private System.Windows.Forms.Label inputLengthValueBox2;
+        private System.Windows.Forms.Label caretPositionBox1Label;
+        private System.Windows.Forms.Label CaretPositionBox2Label;
+        private System.Windows.Forms.Label caretPositionValueBox1;
+        private System.Windows.Forms.Label caretPositionValueBox2;
+        private System.Windows.Forms.Label SelectionLengthBox1Label;
+        private System.Windows.Forms.Label selectionLengthBox2Label;
+        private System.Windows.Forms.Label selectionLengthValueBox1;
+        private System.Windows.Forms.Label selectionLengthValueBox2;
     }
 }
