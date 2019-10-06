@@ -1,6 +1,6 @@
 ﻿namespace IBERPrime
 {
-    partial class Form1
+    partial class IBERPrime
     {
         /// <summary>
         /// Required designer variable.
@@ -54,6 +54,7 @@
             this.selectionLengthBox2Label = new System.Windows.Forms.Label();
             this.selectionLengthValueBox1 = new System.Windows.Forms.Label();
             this.selectionLengthValueBox2 = new System.Windows.Forms.Label();
+            this.findSubsequence = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FindPrimers
@@ -303,11 +304,22 @@
             this.selectionLengthValueBox2.TabIndex = 25;
             this.selectionLengthValueBox2.Text = "0";
             // 
-            // Form1
+            // findSubsequence
+            // 
+            this.findSubsequence.Location = new System.Drawing.Point(772, 28);
+            this.findSubsequence.Name = "findSubsequence";
+            this.findSubsequence.Size = new System.Drawing.Size(113, 23);
+            this.findSubsequence.TabIndex = 26;
+            this.findSubsequence.Text = "Search in sequence";
+            this.findSubsequence.UseVisualStyleBackColor = true;
+            this.findSubsequence.Click += new System.EventHandler(this.findSubsequence_Click);
+            // 
+            // IBERPrime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 687);
+            this.Controls.Add(this.findSubsequence);
             this.Controls.Add(this.selectionLengthValueBox2);
             this.Controls.Add(this.selectionLengthValueBox1);
             this.Controls.Add(this.selectionLengthBox2Label);
@@ -334,8 +346,8 @@
             this.Controls.Add(this.inputBox2);
             this.Controls.Add(this.inputBox1);
             this.Controls.Add(this.FindPrimers);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "IBERPrime";
+            this.Text = "IBERPrime";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
@@ -371,5 +383,6 @@
         private System.Windows.Forms.Label selectionLengthBox2Label;
         private System.Windows.Forms.Label selectionLengthValueBox1;
         private System.Windows.Forms.Label selectionLengthValueBox2;
+        private System.Windows.Forms.Button findSubsequence;
     }
 }

@@ -11,11 +11,11 @@
     using System.Timers;
     using System.Windows.Forms;
 
-    public partial class Form1 : Form
+    public partial class IBERPrime : Form
     {
         private System.Timers.Timer housekeepingTimer;
 
-        public Form1()
+        public IBERPrime()
         {
             InitializeComponent();
             housekeepingTimer = new System.Timers.Timer();
@@ -97,7 +97,7 @@
         }
 
         /// <summary>
-        /// Checks input for validity - currently valid letters are A T G C, all others are change to 'N'
+        /// Checks input for validity - currently valid letters are A T G C (upper and lowercase), all others are change to 'N'
         /// </summary>
         /// <param name="textBoxtoProcess"></param>
         private void ProcessSeqenceInput(RichTextBox textBoxtoProcess)
@@ -197,52 +197,11 @@
         {
             textBoxToReverseComplement.Enabled = false;
             char[] charArray = textBoxToReverseComplement.Text.ToCharArray();
-            Array.Reverse(charArray);
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char ch in charArray)
-            {
-                switch (ch)
-                {
-                    case 'a':
-                    case 'A':
-                        {
-                            sb.Append('T');
-                            break;
-                        }
-
-                    case 't':
-                    case 'T':
-                        {
-                            sb.Append('A');
-                            break;
-                        }
-
-                    case 'c':
-                    case 'C':
-                        {
-                            sb.Append('G');
-                            break;
-                        }
-
-                    case 'g':
-                    case 'G':
-                        {
-                            sb.Append('C');
-                            break;
-                        }
-
-                    default:
-                        {
-                            sb.Append('N');
-                            break;
-                        }
-                }
-            }
+            Array.Reverse(charArray);        
 
             textBoxToReverseComplement.Enabled = true;
             this.ActiveControl = textBoxToReverseComplement;
-            textBoxToReverseComplement.Text = sb.ToString();
+            textBoxToReverseComplement.Text = Functions.ReturnComplement(charArray);
             textBoxToReverseComplement.Select(textBoxToReverseComplement.Text.Length, 0);
         }
 
@@ -255,6 +214,21 @@
         {
             housekeepingTimer.Dispose();
             //housekeepingTimer = null;
+        }
+
+        /// <summary>
+        /// Opens the the window for subsequence search
+        /// </summary>
+        private void findSubsequence_Click(object sender, EventArgs e)
+        {
+            // Closes the search window if open
+            if (Application.OpenForms.OfType<Search>().Any())
+            {
+                Application.OpenForms.OfType<Search>().First().Close();
+            }
+
+            Search form = new Search(inputBox1);
+            form.Show();
         }
     }
 }
