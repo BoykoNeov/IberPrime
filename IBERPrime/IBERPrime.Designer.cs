@@ -54,15 +54,20 @@
             this.selectionLengthBox2Label = new System.Windows.Forms.Label();
             this.selectionLengthValueBox1 = new System.Windows.Forms.Label();
             this.selectionLengthValueBox2 = new System.Windows.Forms.Label();
-            this.findSubsequence = new System.Windows.Forms.Button();
+            this.findSubsequenceBox1 = new System.Windows.Forms.Button();
             this.colorizeBasesBox1 = new System.Windows.Forms.ComboBox();
             this.colorizeBasesLabel1 = new System.Windows.Forms.Label();
+            this.selectionEndBox1Label = new System.Windows.Forms.Label();
+            this.selectionEndValueBox1 = new System.Windows.Forms.Label();
+            this.selectionEndBox2Label = new System.Windows.Forms.Label();
+            this.selectionEndValueBox2 = new System.Windows.Forms.Label();
+            this.findSubsequenceBox2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // FindPrimers
             // 
             this.FindPrimers.Location = new System.Drawing.Point(1409, 556);
-            this.FindPrimers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FindPrimers.Margin = new System.Windows.Forms.Padding(4);
             this.FindPrimers.Name = "FindPrimers";
             this.FindPrimers.Size = new System.Drawing.Size(100, 28);
             this.FindPrimers.TabIndex = 0;
@@ -72,7 +77,7 @@
             // inputBox1
             // 
             this.inputBox1.Location = new System.Drawing.Point(16, 68);
-            this.inputBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputBox1.Margin = new System.Windows.Forms.Padding(4);
             this.inputBox1.MaxLength = 20000;
             this.inputBox1.Name = "inputBox1";
             this.inputBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -84,7 +89,7 @@
             // inputBox2
             // 
             this.inputBox2.Location = new System.Drawing.Point(16, 293);
-            this.inputBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inputBox2.Margin = new System.Windows.Forms.Padding(4);
             this.inputBox2.MaxLength = 20000;
             this.inputBox2.Name = "inputBox2";
             this.inputBox2.Size = new System.Drawing.Size(1492, 150);
@@ -95,7 +100,7 @@
             // richTextBox3
             // 
             this.richTextBox3.Location = new System.Drawing.Point(16, 591);
-            this.richTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(1492, 200);
             this.richTextBox3.TabIndex = 3;
@@ -126,7 +131,7 @@
             // revereComplementButtonBox1
             // 
             this.revereComplementButtonBox1.Location = new System.Drawing.Point(1313, 34);
-            this.revereComplementButtonBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.revereComplementButtonBox1.Margin = new System.Windows.Forms.Padding(4);
             this.revereComplementButtonBox1.Name = "revereComplementButtonBox1";
             this.revereComplementButtonBox1.Size = new System.Drawing.Size(193, 28);
             this.revereComplementButtonBox1.TabIndex = 6;
@@ -137,7 +142,7 @@
             // revereComplementButtonBox2
             // 
             this.revereComplementButtonBox2.Location = new System.Drawing.Point(1313, 261);
-            this.revereComplementButtonBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.revereComplementButtonBox2.Margin = new System.Windows.Forms.Padding(4);
             this.revereComplementButtonBox2.Name = "revereComplementButtonBox2";
             this.revereComplementButtonBox2.Size = new System.Drawing.Size(193, 28);
             this.revereComplementButtonBox2.TabIndex = 7;
@@ -171,7 +176,7 @@
             // conformBox1Button
             // 
             this.conformBox1Button.Location = new System.Drawing.Point(1185, 34);
-            this.conformBox1Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.conformBox1Button.Margin = new System.Windows.Forms.Padding(4);
             this.conformBox1Button.Name = "conformBox1Button";
             this.conformBox1Button.Size = new System.Drawing.Size(123, 28);
             this.conformBox1Button.TabIndex = 10;
@@ -182,7 +187,7 @@
             // conformBox2Button
             // 
             this.conformBox2Button.Location = new System.Drawing.Point(1185, 261);
-            this.conformBox2Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.conformBox2Button.Margin = new System.Windows.Forms.Padding(4);
             this.conformBox2Button.Name = "conformBox2Button";
             this.conformBox2Button.Size = new System.Drawing.Size(123, 28);
             this.conformBox2Button.TabIndex = 11;
@@ -194,7 +199,7 @@
             // 
             this.autoconformcheckBox1.AutoSize = true;
             this.autoconformcheckBox1.Location = new System.Drawing.Point(1187, 11);
-            this.autoconformcheckBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoconformcheckBox1.Margin = new System.Windows.Forms.Padding(4);
             this.autoconformcheckBox1.Name = "autoconformcheckBox1";
             this.autoconformcheckBox1.Size = new System.Drawing.Size(58, 21);
             this.autoconformcheckBox1.TabIndex = 12;
@@ -205,7 +210,7 @@
             // 
             this.autoconformcheckBox2.AutoSize = true;
             this.autoconformcheckBox2.Location = new System.Drawing.Point(1187, 239);
-            this.autoconformcheckBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoconformcheckBox2.Margin = new System.Windows.Forms.Padding(4);
             this.autoconformcheckBox2.Name = "autoconformcheckBox2";
             this.autoconformcheckBox2.Size = new System.Drawing.Size(58, 21);
             this.autoconformcheckBox2.TabIndex = 13;
@@ -275,7 +280,7 @@
             // caretPositionValueBox1
             // 
             this.caretPositionValueBox1.AutoSize = true;
-            this.caretPositionValueBox1.Location = new System.Drawing.Point(361, 224);
+            this.caretPositionValueBox1.Location = new System.Drawing.Point(355, 224);
             this.caretPositionValueBox1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.caretPositionValueBox1.Name = "caretPositionValueBox1";
             this.caretPositionValueBox1.Size = new System.Drawing.Size(16, 17);
@@ -285,7 +290,7 @@
             // caretPositionValueBox2
             // 
             this.caretPositionValueBox2.AutoSize = true;
-            this.caretPositionValueBox2.Location = new System.Drawing.Point(361, 448);
+            this.caretPositionValueBox2.Location = new System.Drawing.Point(355, 447);
             this.caretPositionValueBox2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.caretPositionValueBox2.Name = "caretPositionValueBox2";
             this.caretPositionValueBox2.Size = new System.Drawing.Size(16, 17);
@@ -295,7 +300,7 @@
             // SelectionLengthBox1Label
             // 
             this.SelectionLengthBox1Label.AutoSize = true;
-            this.SelectionLengthBox1Label.Location = new System.Drawing.Point(439, 224);
+            this.SelectionLengthBox1Label.Location = new System.Drawing.Point(420, 224);
             this.SelectionLengthBox1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SelectionLengthBox1Label.Name = "SelectionLengthBox1Label";
             this.SelectionLengthBox1Label.Size = new System.Drawing.Size(113, 17);
@@ -305,7 +310,7 @@
             // selectionLengthBox2Label
             // 
             this.selectionLengthBox2Label.AutoSize = true;
-            this.selectionLengthBox2Label.Location = new System.Drawing.Point(439, 448);
+            this.selectionLengthBox2Label.Location = new System.Drawing.Point(420, 447);
             this.selectionLengthBox2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.selectionLengthBox2Label.Name = "selectionLengthBox2Label";
             this.selectionLengthBox2Label.Size = new System.Drawing.Size(113, 17);
@@ -315,7 +320,7 @@
             // selectionLengthValueBox1
             // 
             this.selectionLengthValueBox1.AutoSize = true;
-            this.selectionLengthValueBox1.Location = new System.Drawing.Point(551, 224);
+            this.selectionLengthValueBox1.Location = new System.Drawing.Point(528, 224);
             this.selectionLengthValueBox1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.selectionLengthValueBox1.Name = "selectionLengthValueBox1";
             this.selectionLengthValueBox1.Size = new System.Drawing.Size(16, 17);
@@ -325,23 +330,23 @@
             // selectionLengthValueBox2
             // 
             this.selectionLengthValueBox2.AutoSize = true;
-            this.selectionLengthValueBox2.Location = new System.Drawing.Point(549, 448);
+            this.selectionLengthValueBox2.Location = new System.Drawing.Point(528, 447);
             this.selectionLengthValueBox2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.selectionLengthValueBox2.Name = "selectionLengthValueBox2";
             this.selectionLengthValueBox2.Size = new System.Drawing.Size(16, 17);
             this.selectionLengthValueBox2.TabIndex = 25;
             this.selectionLengthValueBox2.Text = "0";
             // 
-            // findSubsequence
+            // findSubsequenceBox1
             // 
-            this.findSubsequence.Location = new System.Drawing.Point(1029, 34);
-            this.findSubsequence.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.findSubsequence.Name = "findSubsequence";
-            this.findSubsequence.Size = new System.Drawing.Size(151, 28);
-            this.findSubsequence.TabIndex = 26;
-            this.findSubsequence.Text = "Search in sequence";
-            this.findSubsequence.UseVisualStyleBackColor = true;
-            this.findSubsequence.Click += new System.EventHandler(this.findSubsequence_Click);
+            this.findSubsequenceBox1.Location = new System.Drawing.Point(1029, 34);
+            this.findSubsequenceBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.findSubsequenceBox1.Name = "findSubsequenceBox1";
+            this.findSubsequenceBox1.Size = new System.Drawing.Size(151, 28);
+            this.findSubsequenceBox1.TabIndex = 26;
+            this.findSubsequenceBox1.Text = "Search in sequence";
+            this.findSubsequenceBox1.UseVisualStyleBackColor = true;
+            this.findSubsequenceBox1.Click += new System.EventHandler(this.findSubsequenceBox1_Click);
             // 
             // colorizeBasesBox1
             // 
@@ -366,14 +371,66 @@
             this.colorizeBasesLabel1.TabIndex = 28;
             this.colorizeBasesLabel1.Text = "Colorize bases:";
             // 
+            // selectionEndBox1Label
+            // 
+            this.selectionEndBox1Label.AutoSize = true;
+            this.selectionEndBox1Label.Location = new System.Drawing.Point(560, 224);
+            this.selectionEndBox1Label.Name = "selectionEndBox1Label";
+            this.selectionEndBox1Label.Size = new System.Drawing.Size(98, 17);
+            this.selectionEndBox1Label.TabIndex = 29;
+            this.selectionEndBox1Label.Text = "Selection end:";
+            // 
+            // selectionEndValueBox1
+            // 
+            this.selectionEndValueBox1.AutoSize = true;
+            this.selectionEndValueBox1.Location = new System.Drawing.Point(654, 224);
+            this.selectionEndValueBox1.Name = "selectionEndValueBox1";
+            this.selectionEndValueBox1.Size = new System.Drawing.Size(16, 17);
+            this.selectionEndValueBox1.TabIndex = 30;
+            this.selectionEndValueBox1.Text = "0";
+            // 
+            // selectionEndBox2Label
+            // 
+            this.selectionEndBox2Label.AutoSize = true;
+            this.selectionEndBox2Label.Location = new System.Drawing.Point(563, 447);
+            this.selectionEndBox2Label.Name = "selectionEndBox2Label";
+            this.selectionEndBox2Label.Size = new System.Drawing.Size(98, 17);
+            this.selectionEndBox2Label.TabIndex = 31;
+            this.selectionEndBox2Label.Text = "Selection end:";
+            // 
+            // selectionEndValueBox2
+            // 
+            this.selectionEndValueBox2.AutoSize = true;
+            this.selectionEndValueBox2.Location = new System.Drawing.Point(654, 447);
+            this.selectionEndValueBox2.Name = "selectionEndValueBox2";
+            this.selectionEndValueBox2.Size = new System.Drawing.Size(16, 17);
+            this.selectionEndValueBox2.TabIndex = 32;
+            this.selectionEndValueBox2.Text = "0";
+            // 
+            // findSubsequenceBox2
+            // 
+            this.findSubsequenceBox2.Location = new System.Drawing.Point(1029, 261);
+            this.findSubsequenceBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.findSubsequenceBox2.Name = "findSubsequenceBox2";
+            this.findSubsequenceBox2.Size = new System.Drawing.Size(151, 28);
+            this.findSubsequenceBox2.TabIndex = 33;
+            this.findSubsequenceBox2.Text = "Search in sequence";
+            this.findSubsequenceBox2.UseVisualStyleBackColor = true;
+            this.findSubsequenceBox2.Click += new System.EventHandler(this.findSubsequenceBox2_Click);
+            // 
             // IBERPrime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1540, 846);
+            this.Controls.Add(this.findSubsequenceBox2);
+            this.Controls.Add(this.selectionEndValueBox2);
+            this.Controls.Add(this.selectionEndBox2Label);
+            this.Controls.Add(this.selectionEndValueBox1);
+            this.Controls.Add(this.selectionEndBox1Label);
             this.Controls.Add(this.colorizeBasesLabel1);
             this.Controls.Add(this.colorizeBasesBox1);
-            this.Controls.Add(this.findSubsequence);
+            this.Controls.Add(this.findSubsequenceBox1);
             this.Controls.Add(this.selectionLengthValueBox2);
             this.Controls.Add(this.selectionLengthValueBox1);
             this.Controls.Add(this.selectionLengthBox2Label);
@@ -400,7 +457,7 @@
             this.Controls.Add(this.inputBox2);
             this.Controls.Add(this.inputBox1);
             this.Controls.Add(this.FindPrimers);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "IBERPrime";
             this.Text = "IBERPrime";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -438,8 +495,13 @@
         private System.Windows.Forms.Label selectionLengthBox2Label;
         private System.Windows.Forms.Label selectionLengthValueBox1;
         private System.Windows.Forms.Label selectionLengthValueBox2;
-        private System.Windows.Forms.Button findSubsequence;
+        private System.Windows.Forms.Button findSubsequenceBox1;
         private System.Windows.Forms.ComboBox colorizeBasesBox1;
         private System.Windows.Forms.Label colorizeBasesLabel1;
+        private System.Windows.Forms.Label selectionEndBox1Label;
+        private System.Windows.Forms.Label selectionEndValueBox1;
+        private System.Windows.Forms.Label selectionEndBox2Label;
+        private System.Windows.Forms.Label selectionEndValueBox2;
+        private System.Windows.Forms.Button findSubsequenceBox2;
     }
 }

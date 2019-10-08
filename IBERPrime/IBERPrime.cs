@@ -27,7 +27,7 @@
             InitializeComponent();
             housekeepingTimer = new System.Timers.Timer();
             housekeepingTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdatingFormValues);
-            housekeepingTimer.Interval = 1000;
+            housekeepingTimer.Interval = 800;
             housekeepingTimer.Enabled = true;
         }
 
@@ -68,6 +68,16 @@
             if (int.Parse(selectionLengthValueBox2.Text) != inputBox2.SelectionLength)
             {
                 selectionLengthValueBox2.Text = inputBox2.SelectionLength.ToString();
+            }
+
+            if (int.Parse(selectionEndValueBox1.Text) != inputBox1.SelectionStart + inputBox1.SelectionLength)
+            {
+                selectionEndValueBox1.Text = (inputBox1.SelectionStart + inputBox1.SelectionLength).ToString();
+            }
+
+            if (int.Parse(selectionEndValueBox2.Text) != inputBox2.SelectionStart + inputBox2.SelectionLength)
+            {
+                selectionEndValueBox2.Text = (inputBox2.SelectionStart + inputBox2.SelectionLength).ToString();
             }
         }
 
@@ -226,7 +236,7 @@
         /// <summary>
         /// Opens the the window for subsequence search
         /// </summary>
-        private void findSubsequence_Click(object sender, EventArgs e)
+        private void findSubsequenceBox1_Click(object sender, EventArgs e)
         {
             // Closes the search window if open
             if (Application.OpenForms.OfType<Search>().Any())
@@ -235,6 +245,17 @@
             }
 
             Search form = new Search(inputBox1);
+            form.Show();
+        }
+
+        private void findSubsequenceBox2_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Search>().Any())
+            {
+                Application.OpenForms.OfType<Search>().First().Close();
+            }
+
+            Search form = new Search(inputBox2);
             form.Show();
         }
 
@@ -268,52 +289,52 @@
             }
         }
 
-        private void ColorizeBox(RichTextBox inputBox, ColorizeBy dnaBase)
+        private void ColorizeBox(RichTextBox currentBox, ColorizeBy dnaBase)
         {
-            for (int i = 0; i < inputBox.Text.Length; i++)
+            for (int i = 0; i < currentBox.Text.Length; i++)
             {
-                inputBox.Select(i, 1);
+                currentBox.Select(i, 1);
 
                 if (dnaBase == ColorizeBy.DNABase)
                 {
-                    switch (inputBox.Text[i])
+                    switch (currentBox.Text[i])
                     {
                         case 'a':
                         case 'A':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.GreenYellow;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.GreenYellow;
                                 break;
                             }
 
                         case 'g':
                         case 'G':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.OrangeRed;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.OrangeRed;
                                 break;
                             }
 
                         case 'c':
                         case 'C':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.Blue;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Blue;
                                 break;
                             }
 
                         case 't':
                         case 'T':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.Gold;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Gold;
                                 break;
                             }
 
                         case 'N':
                             {
-                                inputBox.SelectionColor = Color.Blue;
-                                inputBox.SelectionBackColor = Color.White;
+                                currentBox.SelectionColor = Color.Blue;
+                                currentBox.SelectionBackColor = Color.White;
                                 break;
                             }
                         default:
@@ -324,15 +345,15 @@
                 }
                 else if (dnaBase == ColorizeBy.BigSmall)
                 {
-                    switch (inputBox.Text[i])
+                    switch (currentBox.Text[i])
                     {
                         case 'g':
                         case 'G':
                         case 'a':
                         case 'A':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.BlueViolet;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.BlueViolet;
                                 break;
                             }
 
@@ -341,14 +362,14 @@
                         case 'c':
                         case 'C':
                             {
-                                inputBox.SelectionColor = Color.Black;
-                                inputBox.SelectionBackColor = Color.Magenta;
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Magenta;
                                 break;
                             }
                         case 'N':
                             {
-                                inputBox.SelectionColor = Color.Blue;
-                                inputBox.SelectionBackColor = Color.White;
+                                currentBox.SelectionColor = Color.Blue;
+                                currentBox.SelectionBackColor = Color.White;
                                 break;
                             }
                         default:
@@ -359,10 +380,14 @@
                 }
                 else if (dnaBase == ColorizeBy.None)
                 {
-                    inputBox.SelectionColor = Color.Black;
-                    inputBox.SelectionBackColor = Color.White;
+                    currentBox.SelectionColor = Color.Black;
+                    currentBox.SelectionBackColor = Color.White;
                 }
             }
+
+            currentBox.Select(currentBox.Text.Length, 0);
+            currentBox.SelectionColor = Color.Black;
+            currentBox.SelectionBackColor = Color.White;
         }
     }
 }
