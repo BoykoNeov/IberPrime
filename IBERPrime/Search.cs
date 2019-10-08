@@ -41,14 +41,14 @@ namespace IBERPrime
 
             if (searchComplement)
             {
-                subsequencesToSearch.Add(Functions.ReturnComplement(inputFromFindBox));
+                subsequencesToSearch.Add(DataFunctions.ReturnComplement(inputFromFindBox));
             }
 
             if (searchReverseComplement)
             {
                 char[] charSubsequence = inputFromFindBox.ToCharArray();
                 Array.Reverse(charSubsequence);
-                subsequencesToSearch.Add(Functions.ReturnComplement(charSubsequence));
+                subsequencesToSearch.Add(DataFunctions.ReturnComplement(charSubsequence));
             }
 
             for (int i = 0; i < sequence.Length - subsequenceLength + 1; i++)

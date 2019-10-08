@@ -15,6 +15,13 @@
     {
         private System.Timers.Timer housekeepingTimer;
 
+        enum ColorizeBy
+        {
+            None,
+            DNABase,
+            BigSmall
+        }
+
         public IBERPrime()
         {
             InitializeComponent();
@@ -197,11 +204,11 @@
         {
             textBoxToReverseComplement.Enabled = false;
             char[] charArray = textBoxToReverseComplement.Text.ToCharArray();
-            Array.Reverse(charArray);        
+            Array.Reverse(charArray);
 
             textBoxToReverseComplement.Enabled = true;
             this.ActiveControl = textBoxToReverseComplement;
-            textBoxToReverseComplement.Text = Functions.ReturnComplement(charArray);
+            textBoxToReverseComplement.Text = DataFunctions.ReturnComplement(charArray);
             textBoxToReverseComplement.Select(textBoxToReverseComplement.Text.Length, 0);
         }
 
@@ -229,6 +236,133 @@
 
             Search form = new Search(inputBox1);
             form.Show();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int selectedIndex = colorizeBasesBox1.SelectedIndex;
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.None);
+                        break;
+                    }
+                case 1:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.DNABase);
+                        break;
+                    }
+
+                case 2:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.BigSmall);
+                        break;
+
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void ColorizeBox(RichTextBox inputBox, ColorizeBy dnaBase)
+        {
+            for (int i = 0; i < inputBox.Text.Length; i++)
+            {
+                inputBox.Select(i, 1);
+
+                if (dnaBase == ColorizeBy.DNABase)
+                {
+                    switch (inputBox.Text[i])
+                    {
+                        case 'a':
+                        case 'A':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.GreenYellow;
+                                break;
+                            }
+
+                        case 'g':
+                        case 'G':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.OrangeRed;
+                                break;
+                            }
+
+                        case 'c':
+                        case 'C':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.Blue;
+                                break;
+                            }
+
+                        case 't':
+                        case 'T':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.Gold;
+                                break;
+                            }
+
+                        case 'N':
+                            {
+                                inputBox.SelectionColor = Color.Blue;
+                                inputBox.SelectionBackColor = Color.White;
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                }
+                else if (dnaBase == ColorizeBy.BigSmall)
+                {
+                    switch (inputBox.Text[i])
+                    {
+                        case 'g':
+                        case 'G':
+                        case 'a':
+                        case 'A':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.BlueViolet;
+                                break;
+                            }
+
+                        case 't':
+                        case 'T':
+                        case 'c':
+                        case 'C':
+                            {
+                                inputBox.SelectionColor = Color.Black;
+                                inputBox.SelectionBackColor = Color.Magenta;
+                                break;
+                            }
+                        case 'N':
+                            {
+                                inputBox.SelectionColor = Color.Blue;
+                                inputBox.SelectionBackColor = Color.White;
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                }
+                else if (dnaBase == ColorizeBy.None)
+                {
+                    inputBox.SelectionColor = Color.Black;
+                    inputBox.SelectionBackColor = Color.White;
+                }
+            }
         }
     }
 }
