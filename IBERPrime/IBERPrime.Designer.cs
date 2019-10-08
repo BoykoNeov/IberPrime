@@ -62,6 +62,8 @@
             this.selectionEndBox2Label = new System.Windows.Forms.Label();
             this.selectionEndValueBox2 = new System.Windows.Forms.Label();
             this.findSubsequenceBox2 = new System.Windows.Forms.Button();
+            this.colorizeBasesBox2 = new System.Windows.Forms.ComboBox();
+            this.colorizeBasesLabel2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // FindPrimers
@@ -84,6 +86,7 @@
             this.inputBox1.Size = new System.Drawing.Size(1492, 152);
             this.inputBox1.TabIndex = 1;
             this.inputBox1.Text = "";
+            this.inputBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputBox1_KeyPress);
             this.inputBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox1_KeyUp);
             // 
             // inputBox2
@@ -95,6 +98,7 @@
             this.inputBox2.Size = new System.Drawing.Size(1492, 150);
             this.inputBox2.TabIndex = 2;
             this.inputBox2.Text = "";
+            this.inputBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputBox2_KeyDown);
             this.inputBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox2_KeyUp);
             // 
             // richTextBox3
@@ -418,11 +422,36 @@
             this.findSubsequenceBox2.UseVisualStyleBackColor = true;
             this.findSubsequenceBox2.Click += new System.EventHandler(this.findSubsequenceBox2_Click);
             // 
+            // colorizeBasesBox2
+            // 
+            this.colorizeBasesBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colorizeBasesBox2.FormattingEnabled = true;
+            this.colorizeBasesBox2.Items.AddRange(new object[] {
+            "None",
+            "By base",
+            "By purine/pyrimidine"});
+            this.colorizeBasesBox2.Location = new System.Drawing.Point(901, 262);
+            this.colorizeBasesBox2.Name = "colorizeBasesBox2";
+            this.colorizeBasesBox2.Size = new System.Drawing.Size(121, 24);
+            this.colorizeBasesBox2.TabIndex = 34;
+            this.colorizeBasesBox2.SelectionChangeCommitted += new System.EventHandler(this.colorizeBasesBox2_SelectionChangeCommitted);
+            // 
+            // colorizeBasesLabel2
+            // 
+            this.colorizeBasesLabel2.AutoSize = true;
+            this.colorizeBasesLabel2.Location = new System.Drawing.Point(901, 239);
+            this.colorizeBasesLabel2.Name = "colorizeBasesLabel2";
+            this.colorizeBasesLabel2.Size = new System.Drawing.Size(105, 17);
+            this.colorizeBasesLabel2.TabIndex = 35;
+            this.colorizeBasesLabel2.Text = "Colorize bases:";
+            // 
             // IBERPrime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1540, 846);
+            this.Controls.Add(this.colorizeBasesLabel2);
+            this.Controls.Add(this.colorizeBasesBox2);
             this.Controls.Add(this.findSubsequenceBox2);
             this.Controls.Add(this.selectionEndValueBox2);
             this.Controls.Add(this.selectionEndBox2Label);
@@ -503,5 +532,7 @@
         private System.Windows.Forms.Label selectionEndBox2Label;
         private System.Windows.Forms.Label selectionEndValueBox2;
         private System.Windows.Forms.Button findSubsequenceBox2;
+        private System.Windows.Forms.ComboBox colorizeBasesBox2;
+        private System.Windows.Forms.Label colorizeBasesLabel2;
     }
 }

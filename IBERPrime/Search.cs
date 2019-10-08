@@ -22,7 +22,6 @@ namespace IBERPrime
             this.rtb = rtbox;
         }
 
-        // TO DO
         private void findSubsequenceButton_Click(object sender, EventArgs e)
         {
             int permitedMismatchCount = (int)this.mismatchCounter.Value;
@@ -33,7 +32,7 @@ namespace IBERPrime
             string inputFromFindBox = string.Join("", this.searchTextBox.Text.Split(new[] {" ", "\r\n", "\r", "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)).ToUpper();
             string sequence = this.rtb.Text.ToUpper();
 
-            int subsequenceLength = this.searchTextBox.Text.Length;
+            int subsequenceLength = inputFromFindBox.Length;
 
             Dictionary<int, int> foundPositions = new Dictionary<int, int>();
             List<string> subsequencesToSearch = new List<string>();
@@ -86,8 +85,8 @@ namespace IBERPrime
                 int end = positions.Value;
                 int rtbTextLength = this.rtb.Text.Length;
 
-                //Check in case the content of textbox has changed (in this case the results may be invalid)
-                if (beginning >= rtbTextLength || end >= rtbTextLength)
+                //Check in case the content of textbox has changed (in this case the results may be invalid anyway)
+                if (beginning >= rtbTextLength || end > rtbTextLength)
                 {
                     continue;
                 }
@@ -96,6 +95,10 @@ namespace IBERPrime
                 rtb.SelectionColor = System.Drawing.Color.Yellow;
                 rtb.SelectionBackColor = System.Drawing.Color.Black;
             }
+
+            rtb.Select(rtb.Text.Length, 0);
+            rtb.SelectionColor = Color.Black;
+            rtb.SelectionBackColor = Color.White;
         }
     }
 }

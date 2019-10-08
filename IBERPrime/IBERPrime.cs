@@ -84,7 +84,6 @@
         private void UpdatingFormValues(object sender, ElapsedEventArgs e)
         {
             InvokeTextLengthChange(sender, e);
-
         }
 
         private void RichTextBox1_KeyUp(object sender, KeyEventArgs e)
@@ -289,6 +288,37 @@
             }
         }
 
+
+        private void colorizeBasesBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int selectedIndex = colorizeBasesBox2.SelectedIndex;
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.None);
+                        break;
+                    }
+                case 1:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.DNABase);
+                        break;
+                    }
+
+                case 2:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.BigSmall);
+                        break;
+
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
         private void ColorizeBox(RichTextBox currentBox, ColorizeBy dnaBase)
         {
             for (int i = 0; i < currentBox.Text.Length; i++)
@@ -388,6 +418,23 @@
             currentBox.Select(currentBox.Text.Length, 0);
             currentBox.SelectionColor = Color.Black;
             currentBox.SelectionBackColor = Color.White;
+        }
+
+        /// <summary>
+        /// Not to carry coloring when typing text
+        /// </summary>
+        private void inputBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            inputBox1.Select(inputBox1.SelectionStart, inputBox1.SelectionLength);
+            inputBox1.SelectionColor = Color.Black;
+            inputBox1.SelectionBackColor = Color.White;
+        }
+
+        private void inputBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            inputBox2.Select(inputBox2.SelectionStart, inputBox2.SelectionLength);
+            inputBox2.SelectionColor = Color.Black;
+            inputBox2.SelectionBackColor = Color.White;
         }
     }
 }
