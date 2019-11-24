@@ -15,12 +15,19 @@
     {
         private System.Timers.Timer housekeepingTimer;
 
+        enum ColorizeBy
+        {
+            None,
+            DNABase,
+            BigSmall
+        }
+
         public IBERPrime()
         {
             InitializeComponent();
             housekeepingTimer = new System.Timers.Timer();
             housekeepingTimer.Elapsed += new System.Timers.ElapsedEventHandler(UpdatingFormValues);
-            housekeepingTimer.Interval = 1000;
+            housekeepingTimer.Interval = 800;
             housekeepingTimer.Enabled = true;
         }
 
@@ -62,12 +69,21 @@
             {
                 selectionLengthValueBox2.Text = inputBox2.SelectionLength.ToString();
             }
+
+            if (int.Parse(selectionEndValueBox1.Text) != inputBox1.SelectionStart + inputBox1.SelectionLength)
+            {
+                selectionEndValueBox1.Text = (inputBox1.SelectionStart + inputBox1.SelectionLength).ToString();
+            }
+
+            if (int.Parse(selectionEndValueBox2.Text) != inputBox2.SelectionStart + inputBox2.SelectionLength)
+            {
+                selectionEndValueBox2.Text = (inputBox2.SelectionStart + inputBox2.SelectionLength).ToString();
+            }
         }
 
         private void UpdatingFormValues(object sender, ElapsedEventArgs e)
         {
             InvokeTextLengthChange(sender, e);
-
         }
 
         private void RichTextBox1_KeyUp(object sender, KeyEventArgs e)
@@ -197,11 +213,11 @@
         {
             textBoxToReverseComplement.Enabled = false;
             char[] charArray = textBoxToReverseComplement.Text.ToCharArray();
-            Array.Reverse(charArray);        
+            Array.Reverse(charArray);
 
             textBoxToReverseComplement.Enabled = true;
             this.ActiveControl = textBoxToReverseComplement;
-            textBoxToReverseComplement.Text = Functions.ReturnComplement(charArray);
+            textBoxToReverseComplement.Text = DataFunctions.ReturnComplement(charArray);
             textBoxToReverseComplement.Select(textBoxToReverseComplement.Text.Length, 0);
         }
 
@@ -219,7 +235,7 @@
         /// <summary>
         /// Opens the the window for subsequence search
         /// </summary>
-        private void findSubsequence_Click(object sender, EventArgs e)
+        private void findSubsequenceBox1_Click(object sender, EventArgs e)
         {
             // Closes the search window if open
             if (Application.OpenForms.OfType<Search>().Any())
@@ -229,6 +245,196 @@
 
             Search form = new Search(inputBox1);
             form.Show();
+        }
+
+        private void findSubsequenceBox2_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Search>().Any())
+            {
+                Application.OpenForms.OfType<Search>().First().Close();
+            }
+
+            Search form = new Search(inputBox2);
+            form.Show();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int selectedIndex = colorizeBasesBox1.SelectedIndex;
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.None);
+                        break;
+                    }
+                case 1:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.DNABase);
+                        break;
+                    }
+
+                case 2:
+                    {
+                        ColorizeBox(inputBox1, ColorizeBy.BigSmall);
+                        break;
+
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+
+        private void colorizeBasesBox2_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int selectedIndex = colorizeBasesBox2.SelectedIndex;
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.None);
+                        break;
+                    }
+                case 1:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.DNABase);
+                        break;
+                    }
+
+                case 2:
+                    {
+                        ColorizeBox(inputBox2, ColorizeBy.BigSmall);
+                        break;
+
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void ColorizeBox(RichTextBox currentBox, ColorizeBy dnaBase)
+        {
+            for (int i = 0; i < currentBox.Text.Length; i++)
+            {
+                currentBox.Select(i, 1);
+
+                if (dnaBase == ColorizeBy.DNABase)
+                {
+                    switch (currentBox.Text[i])
+                    {
+                        case 'a':
+                        case 'A':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.GreenYellow;
+                                break;
+                            }
+
+                        case 'g':
+                        case 'G':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.OrangeRed;
+                                break;
+                            }
+
+                        case 'c':
+                        case 'C':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Blue;
+                                break;
+                            }
+
+                        case 't':
+                        case 'T':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Gold;
+                                break;
+                            }
+
+                        case 'N':
+                            {
+                                currentBox.SelectionColor = Color.Blue;
+                                currentBox.SelectionBackColor = Color.White;
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                }
+                else if (dnaBase == ColorizeBy.BigSmall)
+                {
+                    switch (currentBox.Text[i])
+                    {
+                        case 'g':
+                        case 'G':
+                        case 'a':
+                        case 'A':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.BlueViolet;
+                                break;
+                            }
+
+                        case 't':
+                        case 'T':
+                        case 'c':
+                        case 'C':
+                            {
+                                currentBox.SelectionColor = Color.Black;
+                                currentBox.SelectionBackColor = Color.Magenta;
+                                break;
+                            }
+                        case 'N':
+                            {
+                                currentBox.SelectionColor = Color.Blue;
+                                currentBox.SelectionBackColor = Color.White;
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                }
+                else if (dnaBase == ColorizeBy.None)
+                {
+                    currentBox.SelectionColor = Color.Black;
+                    currentBox.SelectionBackColor = Color.White;
+                }
+            }
+
+            currentBox.Select(currentBox.Text.Length, 0);
+            currentBox.SelectionColor = Color.Black;
+            currentBox.SelectionBackColor = Color.White;
+        }
+
+        /// <summary>
+        /// Not to carry coloring when typing text
+        /// </summary>
+        private void inputBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            inputBox1.Select(inputBox1.SelectionStart, inputBox1.SelectionLength);
+            inputBox1.SelectionColor = Color.Black;
+            inputBox1.SelectionBackColor = Color.White;
+        }
+
+        private void inputBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            inputBox2.Select(inputBox2.SelectionStart, inputBox2.SelectionLength);
+            inputBox2.SelectionColor = Color.Black;
+            inputBox2.SelectionBackColor = Color.White;
         }
     }
 }
