@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 static class TmCalculator
 {
-    static decimal CalculateTmSimple(string input)
+    public static decimal CalculateTmSimple(string input)
     {
         decimal primerConcentrationGamma = 50 * (decimal)Math.Pow(10, -9);
 
@@ -52,7 +52,7 @@ static class TmCalculator
         return TmSimple;
     }
 
-    static decimal CalculateTmSantaLucia(string input, decimal saltConcentration = 50m, decimal primerConcentration = 200m, decimal magnesiumConcentration = 2.5m)
+    public static decimal CalculateTmSantaLucia(string input, decimal saltConcentration = 50m, decimal primerConcentration = 200m, decimal magnesiumConcentration = 2.5m)
     {
         //Santalucia 1998
         Dictionary<string, decimal> entalpySantaTable = new Dictionary<string, decimal>();
@@ -145,5 +145,21 @@ static class TmCalculator
         decimal TmSanta = ((1000m * entalpySanta) / (entropySanta + (1.987m * (decimal)Math.Log((double)(primerConcentration / 2000000000))))) - 273.15m;
 
         return TmSanta;
+    }
+
+    public static decimal CalculateGCcontent(string input)
+    {
+        int GCcount = 0;
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (input[i] == 'G' || input[i] == 'C')
+            {
+                GCcount++;
+            }
+        }
+
+        decimal GCpercentage = ((decimal)GCcount / input.Length) * 100;
+        return GCpercentage;
     }
 }
