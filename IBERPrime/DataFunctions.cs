@@ -5,6 +5,13 @@ namespace IBERPrime
 {
     public static class DataFunctions
     {
+        public static string ReturnReverseComplement(string inputString)
+        {
+            char[] temporary = inputString.ToCharArray();
+            Array.Reverse(temporary);
+            return ReturnComplement(new string(temporary));
+        }
+
         public static string ReturnComplement (char[] inputCharArray)
         {
             if (inputCharArray == null)

@@ -439,8 +439,8 @@
 
         private void FindPrimers_Click(object sender, EventArgs e)
         {
-            var myForm = new FindPrimers(inputBox1.Text);
-            myForm.Show();
+            var findPrimers = new FindPrimers(inputBox1.Text);
+            findPrimers.Show();
         }
     }
 }

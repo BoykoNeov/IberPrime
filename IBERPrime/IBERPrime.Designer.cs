@@ -68,9 +68,9 @@
             // 
             this.FindPrimers.Location = new System.Drawing.Point(17, 440);
             this.FindPrimers.Name = "FindPrimers";
-            this.FindPrimers.Size = new System.Drawing.Size(84, 23);
+            this.FindPrimers.Size = new System.Drawing.Size(189, 23);
             this.FindPrimers.TabIndex = 0;
-            this.FindPrimers.Text = "FindPrimers";
+            this.FindPrimers.Text = "Open find primers window";
             this.FindPrimers.UseVisualStyleBackColor = true;
             this.FindPrimers.Click += new System.EventHandler(this.FindPrimers_Click);
             // 

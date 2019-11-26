@@ -31,7 +31,7 @@
             this.desiredPrimerLengthUpDown = new System.Windows.Forms.NumericUpDown();
             this.desiredAmpliconLengthBox = new System.Windows.Forms.TextBox();
             this.desiredPrimerLengthLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.desiredAmpliconLengthLabel = new System.Windows.Forms.Label();
             this.forwardPrimerBox = new System.Windows.Forms.RichTextBox();
             this.reversePrimerBox = new System.Windows.Forms.RichTextBox();
             this.forwardPrimerLengthBox = new System.Windows.Forms.RichTextBox();
@@ -46,8 +46,8 @@
             this.lengthLabel = new System.Windows.Forms.Label();
             this.TmLabel = new System.Windows.Forms.Label();
             this.GCcontentLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.ampliconLengthLabel = new System.Windows.Forms.Label();
+            this.resultingAmpliconLengthTextBox = new System.Windows.Forms.TextBox();
+            this.resultingAmpliconLengthLabel = new System.Windows.Forms.Label();
             this.magnesiumConcentrationBox = new System.Windows.Forms.TextBox();
             this.primerConcentrationBox = new System.Windows.Forms.TextBox();
             this.saltConcentrationBox = new System.Windows.Forms.TextBox();
@@ -55,6 +55,9 @@
             this.MgConcentrationLabel = new System.Windows.Forms.Label();
             this.primerConcentrationLabel = new System.Windows.Forms.Label();
             this.findPrimerGoButton = new System.Windows.Forms.Button();
+            this.forwardPrimerScore = new System.Windows.Forms.RichTextBox();
+            this.reversePrimerScore = new System.Windows.Forms.RichTextBox();
+            this.scoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.desiredPrimerLengthUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +73,7 @@
             this.desiredPrimerLengthUpDown.Size = new System.Drawing.Size(120, 20);
             this.desiredPrimerLengthUpDown.TabIndex = 0;
             this.desiredPrimerLengthUpDown.Value = new decimal(new int[] {
-            15,
+            18,
             0,
             0,
             0});
@@ -82,6 +85,7 @@
             this.desiredAmpliconLengthBox.Size = new System.Drawing.Size(120, 20);
             this.desiredAmpliconLengthBox.TabIndex = 1;
             this.desiredAmpliconLengthBox.Text = "150";
+            this.desiredAmpliconLengthBox.TextChanged += new System.EventHandler(this.desiredAmpliconLengthBox_TextChanged);
             // 
             // desiredPrimerLengthLabel
             // 
@@ -92,14 +96,14 @@
             this.desiredPrimerLengthLabel.TabIndex = 2;
             this.desiredPrimerLengthLabel.Text = "Desired primer length";
             // 
-            // label2
+            // desiredAmpliconLengthLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(142, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Desired amplicon length";
+            this.desiredAmpliconLengthLabel.AutoSize = true;
+            this.desiredAmpliconLengthLabel.Location = new System.Drawing.Point(142, 56);
+            this.desiredAmpliconLengthLabel.Name = "desiredAmpliconLengthLabel";
+            this.desiredAmpliconLengthLabel.Size = new System.Drawing.Size(120, 13);
+            this.desiredAmpliconLengthLabel.TabIndex = 3;
+            this.desiredAmpliconLengthLabel.Text = "Desired amplicon length";
             // 
             // forwardPrimerBox
             // 
@@ -219,22 +223,23 @@
             this.GCcontentLabel.TabIndex = 18;
             this.GCcontentLabel.Text = "GC %";
             // 
-            // textBox1
+            // resultingAmpliconLengthTextBox
             // 
-            this.textBox1.BackColor = System.Drawing.Color.MistyRose;
-            this.textBox1.Location = new System.Drawing.Point(15, 313);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 19;
+            this.resultingAmpliconLengthTextBox.BackColor = System.Drawing.Color.MistyRose;
+            this.resultingAmpliconLengthTextBox.Location = new System.Drawing.Point(15, 313);
+            this.resultingAmpliconLengthTextBox.Name = "resultingAmpliconLengthTextBox";
+            this.resultingAmpliconLengthTextBox.Size = new System.Drawing.Size(117, 20);
+            this.resultingAmpliconLengthTextBox.TabIndex = 19;
+            this.resultingAmpliconLengthTextBox.Text = "150";
             // 
-            // ampliconLengthLabel
+            // resultingAmpliconLengthLabel
             // 
-            this.ampliconLengthLabel.AutoSize = true;
-            this.ampliconLengthLabel.Location = new System.Drawing.Point(15, 297);
-            this.ampliconLengthLabel.Name = "ampliconLengthLabel";
-            this.ampliconLengthLabel.Size = new System.Drawing.Size(85, 13);
-            this.ampliconLengthLabel.TabIndex = 20;
-            this.ampliconLengthLabel.Text = "Amplicon length:";
+            this.resultingAmpliconLengthLabel.AutoSize = true;
+            this.resultingAmpliconLengthLabel.Location = new System.Drawing.Point(15, 297);
+            this.resultingAmpliconLengthLabel.Name = "resultingAmpliconLengthLabel";
+            this.resultingAmpliconLengthLabel.Size = new System.Drawing.Size(131, 13);
+            this.resultingAmpliconLengthLabel.TabIndex = 20;
+            this.resultingAmpliconLengthLabel.Text = "Resulting amplicon length:";
             // 
             // magnesiumConcentrationBox
             // 
@@ -297,11 +302,39 @@
             this.findPrimerGoButton.UseVisualStyleBackColor = true;
             this.findPrimerGoButton.Click += new System.EventHandler(this.findPrimerGoButton_Click);
             // 
+            // forwardPrimerScore
+            // 
+            this.forwardPrimerScore.Location = new System.Drawing.Point(459, 190);
+            this.forwardPrimerScore.Name = "forwardPrimerScore";
+            this.forwardPrimerScore.Size = new System.Drawing.Size(81, 33);
+            this.forwardPrimerScore.TabIndex = 28;
+            this.forwardPrimerScore.Text = "";
+            // 
+            // reversePrimerScore
+            // 
+            this.reversePrimerScore.Location = new System.Drawing.Point(459, 223);
+            this.reversePrimerScore.Name = "reversePrimerScore";
+            this.reversePrimerScore.Size = new System.Drawing.Size(81, 33);
+            this.reversePrimerScore.TabIndex = 29;
+            this.reversePrimerScore.Text = "";
+            // 
+            // scoreLabel
+            // 
+            this.scoreLabel.AutoSize = true;
+            this.scoreLabel.Location = new System.Drawing.Point(461, 171);
+            this.scoreLabel.Name = "scoreLabel";
+            this.scoreLabel.Size = new System.Drawing.Size(35, 13);
+            this.scoreLabel.TabIndex = 30;
+            this.scoreLabel.Text = "Score";
+            // 
             // FindPrimers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 344);
+            this.ClientSize = new System.Drawing.Size(565, 349);
+            this.Controls.Add(this.scoreLabel);
+            this.Controls.Add(this.reversePrimerScore);
+            this.Controls.Add(this.forwardPrimerScore);
             this.Controls.Add(this.findPrimerGoButton);
             this.Controls.Add(this.primerConcentrationLabel);
             this.Controls.Add(this.MgConcentrationLabel);
@@ -309,8 +342,8 @@
             this.Controls.Add(this.saltConcentrationBox);
             this.Controls.Add(this.primerConcentrationBox);
             this.Controls.Add(this.magnesiumConcentrationBox);
-            this.Controls.Add(this.ampliconLengthLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.resultingAmpliconLengthLabel);
+            this.Controls.Add(this.resultingAmpliconLengthTextBox);
             this.Controls.Add(this.GCcontentLabel);
             this.Controls.Add(this.TmLabel);
             this.Controls.Add(this.lengthLabel);
@@ -325,7 +358,7 @@
             this.Controls.Add(this.forwardPrimerLengthBox);
             this.Controls.Add(this.reversePrimerBox);
             this.Controls.Add(this.forwardPrimerBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.desiredAmpliconLengthLabel);
             this.Controls.Add(this.desiredPrimerLengthLabel);
             this.Controls.Add(this.desiredAmpliconLengthBox);
             this.Controls.Add(this.desiredPrimerLengthUpDown);
@@ -342,7 +375,7 @@
         private System.Windows.Forms.NumericUpDown desiredPrimerLengthUpDown;
         private System.Windows.Forms.TextBox desiredAmpliconLengthBox;
         private System.Windows.Forms.Label desiredPrimerLengthLabel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label desiredAmpliconLengthLabel;
         private System.Windows.Forms.RichTextBox forwardPrimerBox;
         private System.Windows.Forms.RichTextBox reversePrimerBox;
         private System.Windows.Forms.RichTextBox forwardPrimerLengthBox;
@@ -357,8 +390,8 @@
         private System.Windows.Forms.Label lengthLabel;
         private System.Windows.Forms.Label TmLabel;
         private System.Windows.Forms.Label GCcontentLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label ampliconLengthLabel;
+        private System.Windows.Forms.TextBox resultingAmpliconLengthTextBox;
+        private System.Windows.Forms.Label resultingAmpliconLengthLabel;
         private System.Windows.Forms.TextBox magnesiumConcentrationBox;
         private System.Windows.Forms.TextBox primerConcentrationBox;
         private System.Windows.Forms.TextBox saltConcentrationBox;
@@ -366,5 +399,8 @@
         private System.Windows.Forms.Label MgConcentrationLabel;
         private System.Windows.Forms.Label primerConcentrationLabel;
         private System.Windows.Forms.Button findPrimerGoButton;
+        private System.Windows.Forms.RichTextBox forwardPrimerScore;
+        private System.Windows.Forms.RichTextBox reversePrimerScore;
+        private System.Windows.Forms.Label scoreLabel;
     }
 }
