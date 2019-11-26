@@ -436,5 +436,11 @@
             inputBox2.SelectionColor = Color.Black;
             inputBox2.SelectionBackColor = Color.White;
         }
+
+        private void FindPrimers_Click(object sender, EventArgs e)
+        {
+            var myForm = new FindPrimers(inputBox1.Text);
+            myForm.Show();
+        }
     }
 }
