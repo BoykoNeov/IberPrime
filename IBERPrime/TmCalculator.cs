@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-static class TmCalculator
+public static class TmCalculator
 {
-    public static decimal CalculateTmSimple(string input)
+    /// <summary>
+    /// Calculate Tm (primer melting temperature) according to a simple formula
+    /// </summary>
+    /// <param name="primer">input primer sequence</param>
+    /// <returns>Tm</returns>
+    public static decimal CalculateTmSimple(string primer)
     {
-        decimal primerConcentrationGamma = 50 * (decimal)Math.Pow(10, -9);
+        //  decimal primerConcentrationGamma = 50 * (decimal)Math.Pow(10, -9);
 
-        input = input.ToUpper();
-
+        primer = primer.ToUpper();
 
         /* Tm= (number of A + number of T) * 2 + (number of G + number of C) * 4 from Marmur (1962)
         for sequences longer than 13 nucleotides, the equation is Tm= 64.9 + 41 * ( number of C-16.4) / (number of A + number of T+  number of G + number of C) */
@@ -18,21 +23,21 @@ static class TmCalculator
         decimal numberOfG = 0;
         decimal numberofC = 0;
 
-        for (int i = 0; i < input.Length; i++)
+        for (int i = 0; i < primer.Length; i++)
         {
-            if (input[i] == 'A')
+            if (primer[i] == 'A')
             {
                 numberOfA++;
             }
-            else if (input[i] == 'T')
+            else if (primer[i] == 'T')
             {
                 numberOfT++;
             }
-            else if (input[i] == 'G')
+            else if (primer[i] == 'G')
             {
                 numberOfG++;
             }
-            else if (input[i] == 'C')
+            else if (primer[i] == 'C')
             {
                 numberofC++;
             }
@@ -40,7 +45,7 @@ static class TmCalculator
 
         decimal TmSimple = 0;
 
-        if (input.Length <= 13)
+        if (primer.Length <= 13)
         {
             TmSimple = ((numberOfA + numberOfT) * 2) + ((numberOfG + numberofC) * 4);
         }
@@ -52,9 +57,16 @@ static class TmCalculator
         return TmSimple;
     }
 
-    public static decimal CalculateTmSantaLucia(string input, decimal saltConcentration = 50m, decimal primerConcentration = 200m, decimal magnesiumConcentration = 2.5m)
+    /// <summary>
+    /// Calculates Tm (melting temperature) of a sequence according to Santalucia 1998
+    /// </summary>
+    /// <param name="primer">input primer sequence</param>
+    /// <param name="saltConcentration">salt concentration, withou Mg++, default 50mM</param>
+    /// <param name="primerConcentration">primer concentration , default 200microM</param>
+    /// <param name="magnesiumConcentration">Mg++ concentration, default 2.5mM</param>
+    /// <returns>Tm, rounded to two decimal places</returns>
+    public static decimal CalculateTmSantaLucia(string primer, decimal saltConcentration = 50m, decimal primerConcentration = 200m, decimal magnesiumConcentration = 2.5m)
     {
-        //Santalucia 1998
         Dictionary<string, decimal> entalpySantaTable = new Dictionary<string, decimal>();
 
         entalpySantaTable.Add("AA", -7.9m);
@@ -105,31 +117,31 @@ static class TmCalculator
         decimal entropySanta = 0;
 
         // Corrections for terminal nucleotides (Santalucia 1998)
-        if (input[0] == 'G' || input[0] == 'C')
+        if (primer[0] == 'G' || primer[0] == 'C')
         {
             entalpySanta += 0.1m;
             entropySanta += -2.8m;
         }
-        else if (input[0] == 'A' || input[0] == 'T')
+        else if (primer[0] == 'A' || primer[0] == 'T')
         {
             entalpySanta += 2.3m;
             entropySanta += 4.1m;
         }
 
-        if (input[input.Length - 1] == 'G' || input[input.Length - 1] == 'C')
+        if (primer[primer.Length - 1] == 'G' || primer[primer.Length - 1] == 'C')
         {
             entalpySanta += 0.1m;
             entropySanta += -2.8m;
         }
-        else if (input[input.Length - 1] == 'A' || input[input.Length - 1] == 'T')
+        else if (primer[primer.Length - 1] == 'A' || primer[primer.Length - 1] == 'T')
         {
             entalpySanta += 2.3m;
             entropySanta += 4.1m;
         }
 
-        for (int i = 0; i < input.Length - 1; i++)
+        for (int i = 0; i < primer.Length - 1; i++)
         {
-            string currentPair = input.Substring(i, 2);
+            string currentPair = primer.Substring(i, 2);
             entalpySanta += entalpySantaTable[currentPair];
             entropySanta += entropySantaTable[currentPair];
         }
@@ -138,28 +150,205 @@ static class TmCalculator
         // effect on entropy by salt correction; von Ahsen et al 1999
         decimal saltEffect = (saltConcentration / 1000m) + ((magnesiumConcentration / 1000m) * 140m);
 
-        decimal saltEffectOnEntropy = 0.368m * input.Length * (decimal)Math.Log((double)saltEffect);
+        decimal saltEffectOnEntropy = 0.368m * primer.Length * (decimal)Math.Log((double)saltEffect);
         entropySanta += saltEffectOnEntropy;
 
 
         decimal TmSanta = ((1000m * entalpySanta) / (entropySanta + (1.987m * (decimal)Math.Log((double)(primerConcentration / 2000000000))))) - 273.15m;
 
-        return TmSanta;
+        return Math.Round(TmSanta, 2);
     }
 
-    public static decimal CalculateGCcontent(string input)
+    /// <summary>
+    /// Calculates sequence GC content
+    /// </summary>
+    /// <param name="sequence">Sequence to calculate GC content</param>
+    /// <returns>GC content to 2 decimal places</returns>
+    public static decimal CalculateGCcontent(string sequence)
     {
         int GCcount = 0;
 
-        for (int i = 0; i < input.Length; i++)
+        for (int i = 0; i < sequence.Length; i++)
         {
-            if (input[i] == 'G' || input[i] == 'C')
+            if (sequence[i] == 'G' || sequence[i] == 'C')
             {
                 GCcount++;
             }
         }
 
-        decimal GCpercentage = ((decimal)GCcount / input.Length) * 100;
+        decimal GCpercentage = ((decimal)GCcount / sequence.Length) * 100;
         return GCpercentage;
+    }
+
+    /// <summary>
+    /// Calculate self end alignment score according to Kampke 2001
+    /// </summary>
+    /// <param name="primer"></param>
+    /// <returns>self end alignment score</returns>
+    public static int CalculateSelfEndAlignment(string primer)
+    {
+        return CalculateTwoPrimerEndHybridization(primer, primer);
+    }
+
+    /// <summary>
+    /// Calculate total self alignment, including where 3'ends don't match
+    /// </summary>
+    /// <param name="primer"></param>
+    /// <returns>self alignment score</returns>
+    public static int CalculateSelfAlignment(string primer)
+    {
+        return CalculateTwoPrimerHybridization(primer, primer);
+    }
+
+    /// <summary>
+    /// Calculate hybridization score between two primers
+    /// </summary>
+    /// <param name="firstPrimer">Forward primer</param>
+    /// <param name="secondPrimer">Reverse primer</param>
+    /// <returns>Max score</returns>
+    public static int CalculateTwoPrimerEndHybridization(string firstPrimer, string secondPrimer)
+    {
+        string primerInForward = firstPrimer.ToUpper();
+        char[] tempArray = secondPrimer.ToUpper().ToCharArray();
+        Array.Reverse(tempArray);
+        string primerInReverse = new string(tempArray);
+
+        List<int> scores = new List<int>();
+
+        // for all overlapping the comparision should be to (primer.Length * 2) - 1, but overlappings where there 3' end is not involved are discarded
+        int longerPrimerLength = primerInForward.Length;
+        if (primerInReverse.Length > longerPrimerLength)
+        {
+            longerPrimerLength = primerInReverse.Length;
+        }
+
+        for (int i = 0; i < (longerPrimerLength); i++)
+        {
+            string test1 = primerInForward.Insert(0, new string('-', (i)));
+            string test2 = primerInReverse.Insert(0, new string('-', primerInForward.Length - 1));
+
+            int currentStepScore = 0;
+
+            //Calculate matching score in overlapping sequence pair by pair
+            for (int j = 0; j < test1.Length && j < test2.Length; j++)
+            {
+                if (CheckPairwiseMatch(test1[j], test2[j]))
+                {
+                    currentStepScore += 2;
+                }
+            }
+
+            if (!CheckPairwiseMatch(test1[test1.Length - 1], test2[test1.Length - 1]))
+            {
+                if (!CheckPairwiseMatch(test1[primerInForward.Length - 1], test2[primerInForward.Length - 1]))
+                    currentStepScore = 0;
+            }
+
+            scores.Add(currentStepScore);
+
+            //   For debugging
+            //Console.WriteLine(test1);
+            //Console.WriteLine(test2);
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine($"current score: {currentStepScore}");
+            //Console.WriteLine("***");
+            //Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        // For debugging
+        //Console.ForegroundColor = ConsoleColor.Cyan;
+        //Console.WriteLine(String.Join(",", scores));
+
+        return scores.Max();
+    }
+
+    public static int CalculateTwoPrimerHybridization(string firstPrimer, string secondPrimer)
+    {
+        string primerInForward = firstPrimer.ToUpper();
+        char[] tempArray = secondPrimer.ToUpper().ToCharArray();
+        Array.Reverse(tempArray);
+        string primerInReverse = new string(tempArray);
+
+        //For debugging
+        //string stringforMatches = "";
+
+        List<int> scores = new List<int>();
+
+        // for all overlapping the comparision should be to (primer.Length * 2) - 1, but overlappings where there 3' end is not involved are discarded
+        int longerPrimerLength = primerInForward.Length;
+        if (primerInReverse.Length > longerPrimerLength)
+        {
+            longerPrimerLength = primerInReverse.Length;
+        }
+
+        for (int i = 0; i < (longerPrimerLength * 2 - 1); i++)
+        {
+            string test1 = primerInForward.Insert(0, new string('-', (i)));
+            string test2 = primerInReverse.Insert(0, new string('-', primerInForward.Length - 1));
+
+            int currentStepScore = 0;
+
+            //Calculate matching score in overlapping sequence pair by pair
+            for (int j = 0; j < test1.Length && j < test2.Length; j++)
+            {
+                if (CheckPairwiseMatch(test1[j], test2[j]))
+                {
+                    currentStepScore += 2;
+
+                    //   For debugging
+                    //    stringforMatches += '|';
+                    //}
+                    //else
+                    //{
+                    //    stringforMatches += ' ';
+                }
+            }
+
+            scores.Add(currentStepScore);
+
+            //  For debugging
+            //Console.WriteLine(test1);
+            //Console.WriteLine(stringforMatches);
+            //stringforMatches = "";
+            //Console.WriteLine(test2);
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine($"current score: {currentStepScore}");
+            //Console.WriteLine("***");
+            //Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        //For debugging
+        //Console.ForegroundColor = ConsoleColor.Cyan;
+        //Console.WriteLine(String.Join(",", scores));
+
+        return scores.Max();
+    }
+
+    /// <summary>
+    /// Check if bases match, only uppercase
+    /// </summary>
+    /// <param name="firstBase"></param>
+    /// <param name="secondBase"></param>
+    /// <returns>true (match) or false (mismatch)</returns>
+    private static bool CheckPairwiseMatch(char firstBase, char secondBase)
+    {
+        if (firstBase == 'C' && secondBase == 'G')
+        {
+            return true;
+        }
+        else if (firstBase == 'G' && secondBase == 'C')
+        {
+            return true;
+        }
+        else if (firstBase == 'A' && secondBase == 'T')
+        {
+            return true;
+        }
+        else if (firstBase == 'T' && secondBase == 'A')
+        {
+            return true;
+        }
+
+        return false;
     }
 }
